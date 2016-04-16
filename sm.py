@@ -1,4 +1,3 @@
-
 import requests
 import sys
 import os
@@ -19,16 +18,14 @@ if (len(sys.argv[1])>3):
 	print url1
 
 else:
-	dir = '/users/xuguodong/desktop/figure'
+	dir = '/users/xuguodong/desktop/figure/'
 	l = os.listdir(dir)
-	l.sort(key = lambda fn: os.path.getmtime(dir+'/'+fn) if not os.path.isdir(dir+'/'+fn) else 0)
+	l.sort(key = lambda fn: os.path.getmtime(dir+fn) if not os.path.isdir(dir+fn) else 0)
 	l.reverse()
 	url = 'https://sm.ms/api/upload';
-
-	path = '/users/xuguodong/desktop/figure/';
 	url1 = []
 	for i in range(int(sys.argv[1])):
-		files = {'smfile' : open(path+l[i], 'rb')};
+		files = {'smfile' : open(dir+l[i], 'rb')};
 
 		r = requests.post(url, files = files);
 
